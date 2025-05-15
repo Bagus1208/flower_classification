@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "624370550422",
+    "project_id": "tugas1-715b9",
+    "storage_bucket": "tugas1-715b9.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:624370550422:android:5e7582b36a7d6bb1bb64b7",
+        "android_client_info": {
+          "package_name": "com.example.flower_classification"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCkuXWrg1VPsogxwWdcgAM2467GOgj334s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

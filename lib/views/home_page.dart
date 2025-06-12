@@ -95,7 +95,7 @@ class _HomePageState extends State<HomePage> {
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: orientation == Orientation.portrait ? 2 : 4,
                     mainAxisSpacing: 10,
-                    childAspectRatio: 2 / 2.5,
+                    childAspectRatio: 2 / 2.6,
                   ),
                   itemBuilder: (context, index) {
                     final flower = flowers[index];

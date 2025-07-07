@@ -1,7 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flower_classification/classes/flower.dart';
+import 'package:flower_classification/views/predict_page.dart';
 import 'package:flower_classification/widgets/flower_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flower_classification/views/profile.dart';
+import 'package:flower_classification/views/riwayat.dart';
+import 'package:flower_classification/classes/colors.dart';
+import 'package:flower_classification/views/info.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -13,6 +18,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<Flower> flowers = [];
   final db = FirebaseFirestore.instance;
+  int _currentIndex = 0;
 
   void getFlowers() async {
     final result =
@@ -40,6 +46,72 @@ class _HomePageState extends State<HomePage> {
     final orientation = MediaQuery.of(context).orientation;
 
     return Scaffold(
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: greencolor,
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.white70,
+        currentIndex: _currentIndex,
+        onTap: (int index) {
+          setState(() {
+            _currentIndex = index;
+          });
+
+          if (index == 1) {
+            Navigator.of(context).pushReplacement(
+              PageRouteBuilder(
+                pageBuilder:
+                    (context, animation1, animation2) => const HistoryPage(),
+                transitionDuration: Duration.zero,
+                reverseTransitionDuration: Duration.zero,
+              ),
+            );
+          } else if (index == 2) {
+            Navigator.of(context).pushReplacement(
+              PageRouteBuilder(
+                pageBuilder:
+                    (context, animation1, animation2) => const PredictPage(),
+                transitionDuration: Duration.zero,
+                reverseTransitionDuration: Duration.zero,
+              ),
+            );
+          } else if (index == 3) {
+            Navigator.of(context).pushReplacement(
+              PageRouteBuilder(
+                pageBuilder:
+                    (context, animation1, animation2) => const InfoPage(),
+                transitionDuration: Duration.zero,
+                reverseTransitionDuration: Duration.zero,
+              ),
+            );
+          } else if (index == 4) {
+            Navigator.of(context).pushReplacement(
+              PageRouteBuilder(
+                pageBuilder:
+                    (context, animation1, animation2) => const ProfileView(),
+                transitionDuration: Duration.zero,
+                reverseTransitionDuration: Duration.zero,
+              ),
+            );
+          }
+        },
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Beranda'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.assignment_outlined),
+            label: 'Riwayat',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.center_focus_strong_rounded),
+            label: 'Klasifikasi',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.announcement_rounded),
+            label: 'Info',
+          ),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profil'),
+        ],
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(

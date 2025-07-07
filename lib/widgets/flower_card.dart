@@ -1,3 +1,4 @@
+import 'package:flower_classification/classes/colors.dart';
 import 'package:flower_classification/classes/flower.dart';
 import 'package:flutter/material.dart';
 
@@ -48,9 +49,63 @@ class FlowerCard extends StatelessWidget {
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         fixedSize: Size(width / 2.4, height / 25.3),
-                        backgroundColor: Colors.green,
+                        backgroundColor: greencolor,
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              title: Text(flower.nama),
+                              content: SingleChildScrollView(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: Image.network(
+                                        flower.imageUrl,
+                                        height: 150,
+                                        width: double.infinity,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    SizedBox(height: 12),
+                                    Text(
+                                      'Deskripsi:',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Text(flower.deskripsi),
+                                    SizedBox(height: 10),
+                                    Text(
+                                      'Manfaat:',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    ...flower.manfaat
+                                        .map((m) => Text('• $m'))
+                                        .toList(),
+                                  ],
+                                ),
+                              ),
+                              actions: [
+                                TextButton(
+                                  child: Text('Tutup'),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      },
                       child: Text(
                         'Lihat Detail',
                         style: TextStyle(
